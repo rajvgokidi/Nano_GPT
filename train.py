@@ -67,6 +67,7 @@ class BigramLanguageModel(nn.Module):
         self.lm_head = nn.Linear(n_embd, vocab_size)
 
     def forward(self, idx, targets = None):
+        B, T = idx.shape
 
         tok_emb = self.token_embedding_table(idx) # (B, T, C)
         pos_emb = self.position_embedding_table(torch.arange(T, device=device))# (T, C)
@@ -110,5 +111,4 @@ for iter in range(max_iters):
     optimizer.step()
 
 context = torch.zeros((1,1), dtype=torch.long)
-# print(decode(model.generate(context, max_new_tokens = 100)[0].tolist()))
 print(decode(model.generate(context, max_new_tokens = 100)[0].tolist()))
