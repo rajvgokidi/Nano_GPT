@@ -110,4 +110,5 @@ for iter in range(max_iters):
     optimizer.step()
 
 context = torch.zeros((1,1), dtype=torch.long)
+# print(decode(model.generate(context, max_new_tokens = 100)[0].tolist()))
 print(decode(model.generate(context, max_new_tokens = 100)[0].tolist()))
